@@ -39,11 +39,25 @@ submitBtn.addEventListener('click', checkAnswer);
 restartBtn.addEventListener('click', restartGame);
 retryErrorsBtn.addEventListener('click', retryErrors);
 retrySubmitBtn.addEventListener('click', checkRetryAnswer);
+
+// Validation et mask pour l'input de réponse
+answerInput.addEventListener('input', (e) => {
+    // Supprimer tous les caractères non-numériques
+    e.target.value = e.target.value.replace(/[^0-9]/g, '');
+});
+
 answerInput.addEventListener('keypress', (e) => {
     if (e.key === 'Enter') {
         checkAnswer();
     }
 });
+
+// Validation et mask pour l'input de retesting
+retryAnswerInput.addEventListener('input', (e) => {
+    // Supprimer tous les caractères non-numériques
+    e.target.value = e.target.value.replace(/[^0-9]/g, '');
+});
+
 retryAnswerInput.addEventListener('keypress', (e) => {
     if (e.key === 'Enter') {
         checkRetryAnswer();
