@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tables de Multiplication - Quiz Enfant</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎮 Les Tables de Multiplication 🎮</h1>
+            <p class="subtitle">Amusez-vous en révisant !</p>
+        </header>
+
+        <div class="game-section">
+            <!-- Écran de bienvenue -->
+            <div id="welcome-screen" class="screen active">
+                <h2>Prêt à jouer ?</h2>
+                <p>Sélectionne la table que tu veux réviser :</p>
+                
+                <div class="table-selection">
+                    <label>
+                        <input type="checkbox" value="2"> Table de 2
+                    </label>
+                    <label>
+                        <input type="checkbox" value="3"> Table de 3
+                    </label>
+                    <label>
+                        <input type="checkbox" value="4"> Table de 4
+                    </label>
+                    <label>
+                        <input type="checkbox" value="5"> Table de 5
+                    </label>
+                    <label>
+                        <input type="checkbox" value="6"> Table de 6
+                    </label>
+                    <label>
+                        <input type="checkbox" value="7"> Table de 7
+                    </label>
+                    <label>
+                        <input type="checkbox" value="8"> Table de 8
+                    </label>
+                    <label>
+                        <input type="checkbox" value="9"> Table de 9
+                    </label>
+                    <label>
+                        <input type="checkbox" value="10"> Table de 10
+                    </label>
+                </div>
+
+                <button id="start-btn" class="btn btn-primary">Commencer ! 🚀</button>
+            </div>
+
+            <!-- Écran de jeu -->
+            <div id="game-screen" class="screen">
+                <div class="score-bar">
+                    <div class="score">Score: <span id="score">0</span>/10</div>
+                    <div class="progress-bar">
+                        <div id="progress" class="progress-fill"></div>
+                    </div>
+                </div>
+
+                <div class="question-box">
+                    <h2 id="question"></h2>
+                </div>
+
+                <div class="answer-input">
+                    <input type="number" id="answer-input" placeholder="Écris ta réponse..." autofocus>
+                    <button id="submit-btn" class="btn btn-secondary">Vérifier ✓</button>
+                </div>
+
+                <div id="feedback" class="feedback"></div>
+            </div>
+
+            <!-- Écran de fin -->
+            <div id="end-screen" class="screen">
+                <h2 id="end-title"></h2>
+                <div class="final-score">
+                    <p>Tu as marqué : <span id="final-score">0</span>/10</p>
+                </div>
+                <p id="end-message"></p>
+                <button id="restart-btn" class="btn btn-primary">Rejouer 🎮</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
