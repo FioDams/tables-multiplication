@@ -80,7 +80,32 @@
                     <p>Tu as marqué : <span id="final-score">0</span>/10</p>
                 </div>
                 <p id="end-message"></p>
-                <button id="restart-btn" class="btn btn-primary">Rejouer 🎮</button>
+                <div id="error-summary" class="error-summary"></div>
+                <div class="button-group">
+                    <button id="retry-errors-btn" class="btn btn-secondary" style="display:none;">Refaire les erreurs 🔄</button>
+                    <button id="restart-btn" class="btn btn-primary">Rejouer 🎮</button>
+                </div>
+            </div>
+
+            <!-- Écran de retesting -->
+            <div id="retry-screen" class="screen">
+                <div class="score-bar">
+                    <div class="score">Retesting - Score: <span id="retry-score">0</span>/<span id="retry-total">0</span></div>
+                    <div class="progress-bar">
+                        <div id="retry-progress" class="progress-fill"></div>
+                    </div>
+                </div>
+
+                <div class="question-box">
+                    <h2 id="retry-question"></h2>
+                </div>
+
+                <div class="answer-input">
+                    <input type="number" id="retry-answer-input" placeholder="Écris ta réponse..." autofocus>
+                    <button id="retry-submit-btn" class="btn btn-secondary">Vérifier ✓</button>
+                </div>
+
+                <div id="retry-feedback" class="feedback"></div>
             </div>
         </div>
     </div>

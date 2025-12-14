@@ -218,6 +218,23 @@ header h1 {
     box-shadow: 0 0 10px rgba(102, 126, 234, 0.3);
 }
 
+#retry-answer-input {
+    flex: 1;
+    padding: 15px;
+    font-size: 1.2em;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    text-align: center;
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    transition: border-color 0.3s ease;
+}
+
+#retry-answer-input:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 10px rgba(102, 126, 234, 0.3);
+}
+
 .feedback {
     min-height: 60px;
     padding: 15px;
@@ -277,7 +294,31 @@ header h1 {
 #end-message {
     font-size: 1.2em;
     color: #666;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
+}
+
+.error-summary {
+    background: #fff3cd;
+    border: 2px solid #ffc107;
+    border-radius: 10px;
+    padding: 15px;
+    margin: 20px 0;
+    color: #856404;
+}
+
+.error-summary p {
+    margin: 8px 0;
+    font-size: 0.95em;
+}
+
+.button-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.button-group .btn {
+    width: 100%;
 }
 
 /* Responsive */
