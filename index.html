@@ -3,6 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Une application amusante pour réviser les tables de multiplication">
+    <meta name="theme-color" content="#667eea">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Tables Maths">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'><rect fill='%23667eea' width='192' height='192'/><text x='96' y='120' font-size='100' font-weight='bold' fill='%23fff' text-anchor='middle'>×</text></svg>">
+    <link rel="manifest" href="manifest.json">
     <title>Tables de Multiplication - Quiz Enfant</title>
     <link rel="stylesheet" href="styles.css">
 </head>
@@ -111,5 +118,17 @@
     </div>
 
     <script src="script.js"></script>
+    <script>
+        // Enregistrer le Service Worker pour la PWA
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('service-worker.js')
+                .then(registration => {
+                    console.log('✅ Service Worker enregistré:', registration);
+                })
+                .catch(error => {
+                    console.log('❌ Erreur Service Worker:', error);
+                });
+        }
+    </script>
 </body>
 </html>
