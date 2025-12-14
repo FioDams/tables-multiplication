@@ -322,16 +322,277 @@ header h1 {
 }
 
 /* Responsive */
-@media (max-width: 600px) {
-    header h1 {
-        font-size: 2em;
+@media (max-width: 768px) {
+    .container {
+        border-radius: 15px;
+        max-width: 100%;
     }
 
-    .question-box h2 {
-        font-size: 2.5em;
+    header {
+        padding: 20px 15px;
+    }
+
+    header h1 {
+        font-size: 1.8em;
+        margin-bottom: 8px;
+    }
+
+    .subtitle {
+        font-size: 1em;
+    }
+
+    .game-section {
+        padding: 25px 15px;
+        min-height: auto;
+    }
+
+    /* Écran de bienvenue */
+    #welcome-screen h2 {
+        font-size: 1.5em;
+        margin-bottom: 15px;
+    }
+
+    #welcome-screen > p {
+        font-size: 1em;
+        margin-bottom: 20px;
     }
 
     .table-selection {
         grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+        margin-bottom: 20px;
+    }
+
+    .table-selection label {
+        padding: 8px 10px;
+        font-size: 0.9em;
+    }
+
+    .btn {
+        padding: 10px 20px;
+        font-size: 1em;
+    }
+
+    /* Écran de jeu */
+    .question-box {
+        padding: 30px 15px;
+        margin-bottom: 20px;
+        border-radius: 12px;
+    }
+
+    .question-box h2 {
+        font-size: 2.2em;
+        text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.2);
+    }
+
+    .answer-input {
+        flex-direction: column;
+        gap: 8px;
+        margin-bottom: 15px;
+        display: flex;
+    }
+
+    #answer-input,
+    #retry-answer-input {
+        width: 100%;
+        padding: 12px;
+        font-size: 1.1em;
+    }
+
+    .btn-secondary {
+        width: 100%;
+        padding: 12px;
+        min-height: 45px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .feedback {
+        min-height: 50px;
+        padding: 12px;
+        font-size: 1em;
+    }
+
+    .score-bar {
+        margin-bottom: 20px;
+    }
+
+    .score {
+        font-size: 1.1em;
+        margin-bottom: 8px;
+    }
+
+    .progress-bar {
+        height: 15px;
+    }
+
+    /* Écran de fin */
+    #end-title {
+        font-size: 1.8em;
+        margin-bottom: 15px;
+    }
+
+    .final-score {
+        padding: 20px;
+        margin-bottom: 20px;
+    }
+
+    .final-score p {
+        font-size: 2em;
+    }
+
+    #end-message {
+        font-size: 1em;
+        margin-bottom: 20px;
+    }
+
+    .error-summary {
+        padding: 12px;
+        margin: 15px 0;
+    }
+
+    .error-summary p {
+        font-size: 0.9em;
+    }
+
+    .button-group {
+        gap: 8px;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        border-radius: 12px;
+    }
+
+    header {
+        padding: 15px 10px;
+    }
+
+    header h1 {
+        font-size: 1.5em;
+        margin-bottom: 5px;
+    }
+
+    .subtitle {
+        font-size: 0.9em;
+    }
+
+    .game-section {
+        padding: 20px 12px;
+    }
+
+    /* Écran de bienvenue */
+    #welcome-screen h2 {
+        font-size: 1.3em;
+        margin-bottom: 12px;
+    }
+
+    #welcome-screen > p {
+        font-size: 0.95em;
+        margin-bottom: 15px;
+    }
+
+    .table-selection {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+        margin-bottom: 15px;
+    }
+
+    .table-selection label {
+        padding: 6px 8px;
+        font-size: 0.85em;
+        border-radius: 8px;
+    }
+
+    .btn {
+        padding: 10px 16px;
+        font-size: 0.95em;
+        border-radius: 8px;
+    }
+
+    /* Écran de jeu */
+    .question-box {
+        padding: 25px 12px;
+        margin-bottom: 15px;
+        border-radius: 10px;
+    }
+
+    .question-box h2 {
+        font-size: 2em;
+    }
+
+    .answer-input {
+        flex-direction: column;
+        gap: 8px;
+        margin-bottom: 12px;
+        display: flex;
+    }
+
+    #answer-input,
+    #retry-answer-input {
+        padding: 11px;
+        font-size: 1em;
+        width: 100%;
+    }
+
+    .btn-secondary {
+        padding: 11px;
+        width: 100%;
+        min-height: 42px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1em;
+    }
+
+    .feedback {
+        min-height: 45px;
+        padding: 10px;
+        font-size: 0.95em;
+    }
+
+    .score {
+        font-size: 1em;
+        margin-bottom: 6px;
+    }
+
+    .progress-bar {
+        height: 12px;
+    }
+
+    /* Écran de fin */
+    #end-title {
+        font-size: 1.5em;
+        margin-bottom: 12px;
+    }
+
+    .final-score {
+        padding: 15px;
+        margin-bottom: 15px;
+    }
+
+    .final-score p {
+        font-size: 1.6em;
+    }
+
+    #end-message {
+        font-size: 0.95em;
+        margin-bottom: 15px;
+    }
+
+    .error-summary {
+        padding: 10px;
+        margin: 12px 0;
+    }
+
+    .error-summary p {
+        font-size: 0.85em;
+        margin: 6px 0;
+    }
+
+    .button-group {
+        gap: 8px;
     }
 }
