@@ -12,6 +12,9 @@ body {
     justify-content: center;
     align-items: center;
     padding: 20px;
+    padding-bottom: 0; /* Important pour le mobile */
+    transition: padding-bottom 0.3s ease;
+    box-sizing: border-box;
 }
 
 .container {
@@ -21,6 +24,9 @@ body {
     border-radius: 20px;
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
     overflow: hidden;
+    max-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
 header {
@@ -44,6 +50,9 @@ header h1 {
 .game-section {
     padding: 40px 20px;
     min-height: 400px;
+    flex: 1;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
 }
 
 .screen {

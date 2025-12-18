@@ -107,6 +107,28 @@ retryAnswerInput.addEventListener('keypress', (e) => {
     }
 });
 
+// ===== GESTION DU CLAVIER MOBILE =====
+function setupMobileKeyboardFix() {
+    const inputs = [answerInput, retryAnswerInput];
+    
+    inputs.forEach(input => {
+        input.addEventListener('focus', () => {
+            // Ajouter du padding en bas pour laisser de la place
+            document.body.style.paddingBottom = '300px';
+            
+            // Scroll vers l'input après un délai (le clavier prend du temps à s'afficher)
+            setTimeout(() => {
+                input.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }, 300);
+        });
+        
+        input.addEventListener('blur', () => {
+            // Enlever le padding quand le clavier se ferme
+            document.body.style.paddingBottom = '0';
+        });
+    });
+}
+
 function startGame() {
     // Récupérer les tables sélectionnées
     const checkboxes = document.querySelectorAll('.table-selection input[type="checkbox"]:checked');
@@ -431,4 +453,8 @@ function showHint() {
     feedbackElement.className = 'feedback hint';
     hintBtn.disabled = true;
 }
+
+// Initialiser le fix du clavier mobile
+setupMobileKeyboardFix();
+
 console.log('✅ Application prête !');
