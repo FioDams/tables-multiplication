@@ -20,8 +20,7 @@ Une application web interactive et ludique pour aider les enfants à réviser et
 L'application est déployée en ligne avec HTTPS complet (nécessaire pour les PWA).
 
 1. **Ouvrez le lien dans Chrome/Safari sur mobile :**
-   - Sur Android : https://tables-multiplication.netlify.app
-   - Sur iPhone : https://tables-multiplication.netlify.app
+   https://tables-multiplication.app.fiowebdev.fr
 
 2. **Installez l'application :**
 
