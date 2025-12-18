@@ -8,9 +8,26 @@ const MAX_QUESTIONS = 10;
 let mistakesList = []; // Tracker les erreurs
 let isRetryMode = false; // Flag pour le mode retesting
 let retryQuestionIndex = 0; // Index pour le retesting
+let isQuizMode = true; // Flag pour quiz vs apprentissage
+let learnIndex = 0; // Index pour le mode apprentissage
+let hintUsed = false; // Indice utilisé dans cette question
 
 
-// Éléments du DOM
+// Éléments du DOM - Menus
+const mainMenuScreen = document.getElementById('main-menu-screen');
+const learnBtn = document.getElementById('learn-btn');
+const quizBtn = document.getElementById('quiz-btn');
+const backToMenuBtn = document.getElementById('back-to-menu-btn');
+
+// Éléments du DOM - Apprentissage
+const learnScreen = document.getElementById('learn-screen');
+const learnContent = document.getElementById('learn-content');
+const learnTable = document.getElementById('learn-table');
+const learnPrevBtn = document.getElementById('learn-prev-btn');
+const learnNextBtn = document.getElementById('learn-next-btn');
+const learnQuitBtn = document.getElementById('learn-quit-btn');
+
+// Éléments du DOM - Jeu
 const welcomeScreen = document.getElementById('welcome-screen');
 const gameScreen = document.getElementById('game-screen');
 const endScreen = document.getElementById('end-screen');
@@ -18,6 +35,7 @@ const retryScreen = document.getElementById('retry-screen');
 const startBtn = document.getElementById('start-btn');
 const submitBtn = document.getElementById('submit-btn');
 const restartBtn = document.getElementById('restart-btn');
+const hintBtn = document.getElementById('hint-btn');
 const retryErrorsBtn = document.getElementById('retry-errors-btn');
 const retrySubmitBtn = document.getElementById('retry-submit-btn');
 const answerInput = document.getElementById('answer-input');
@@ -35,9 +53,32 @@ const progressFill = document.getElementById('progress');
 const retryProgressFill = document.getElementById('retry-progress');
 const errorSummaryElement = document.getElementById('error-summary');
 
-// Écouteurs d'événements
+// Écouteurs d'événements - Menu principal
+learnBtn.addEventListener('click', () => {
+    const checkboxes = document.querySelectorAll('.table-selection input[type="checkbox"]');
+    checkboxes.forEach(cb => cb.checked = false);
+    showScreen(welcomeScreen);
+    isQuizMode = false;
+});
+
+quizBtn.addEventListener('click', () => {
+    const checkboxes = document.querySelectorAll('.table-selection input[type="checkbox"]');
+    checkboxes.forEach(cb => cb.checked = false);
+    showScreen(welcomeScreen);
+    isQuizMode = true;
+});
+
+backToMenuBtn.addEventListener('click', goBackToMenu);
+
+// Écouteurs d'événements - Apprentissage
+learnPrevBtn.addEventListener('click', () => learnNavigate(-1));
+learnNextBtn.addEventListener('click', () => learnNavigate(1));
+learnQuitBtn.addEventListener('click', goBackToMenu);
+
+// Écouteurs d'événements - Jeu
 startBtn.addEventListener('click', startGame);
 submitBtn.addEventListener('click', checkAnswer);
+hintBtn.addEventListener('click', showHint);
 restartBtn.addEventListener('click', restartGame);
 retryErrorsBtn.addEventListener('click', retryErrors);
 retrySubmitBtn.addEventListener('click', checkRetryAnswer);
@@ -83,11 +124,17 @@ function startGame() {
     mistakesList = [];
     isRetryMode = false;
     
-    // Afficher l'écran de jeu
-    showScreen(gameScreen);
-    
-    // Générer la première question
-    generateQuestion();
+    if (isQuizMode) {
+        // Afficher l'écran de jeu
+        showScreen(gameScreen);
+        // Générer la première question
+        generateQuestion();
+    } else {
+        // Mode apprentissage
+        learnIndex = 0;
+        showScreen(learnScreen);
+        displayLearnContent();
+    }
 }
 
 function generateQuestion() {
@@ -120,6 +167,8 @@ function generateQuestion() {
     answerInput.disabled = false;
     submitBtn.disabled = false;
     answerInput.focus();
+    hintBtn.disabled = false;
+    hintUsed = false;
 }
 
 function checkAnswer() {
@@ -131,15 +180,22 @@ function checkAnswer() {
         return;
     }
 
-    // Désactiver l'input
+    // Désactiver l'input et l'indice
     answerInput.disabled = true;
     submitBtn.disabled = true;
+    hintBtn.disabled = true;
 
     questionCount++;
     
     if (userAnswer === currentQuestion.answer) {
-        score++;
-        feedbackElement.textContent = '✅ Bravo ! C\'est correct !';
+        // Pénalité si indice utilisé
+        if (hintUsed) {
+            score += 0; // Pas de point
+            feedbackElement.textContent = '✅ Correct ! (indice utilisé: -1 pt)';
+        } else {
+            score++;
+            feedbackElement.textContent = '✅ Bravo ! C\'est correct !';
+        }
         feedbackElement.className = 'feedback correct';
     } else {
         feedbackElement.textContent = `❌ Oups ! La réponse était ${currentQuestion.answer}`;
@@ -326,5 +382,53 @@ function showScreen(screen) {
     screen.classList.add('active');
 }
 
-// Initialiser l'application
+// ===== FONCTIONS MODE APPRENTISSAGE =====
+function displayLearnContent() {
+    const table = selectedTables[learnIndex];
+    learnTable.textContent = table;
+    
+    // Générer le contenu de la table
+    let content = '';
+    for (let i = 1; i <= 10; i++) {
+        content += `<div class="learn-item">${table} × ${i} = <span class="learn-item-result">${table * i}</span></div>`;
+    }
+    
+    learnContent.innerHTML = content;
+    
+    // Mettre à jour les boutons de navigation
+    learnPrevBtn.disabled = learnIndex === 0;
+    learnNextBtn.disabled = learnIndex === selectedTables.length - 1;
+}
+
+function learnNavigate(direction) {
+    learnIndex += direction;
+    if (learnIndex >= 0 && learnIndex < selectedTables.length) {
+        displayLearnContent();
+    }
+}
+
+function goBackToMenu() {
+    selectedTables = [];
+    learnIndex = 0;
+    score = 0;
+    questionCount = 0;
+    mistakesList = [];
+    isRetryMode = false;
+    isQuizMode = true;
+    showScreen(mainMenuScreen);
+}
+
+// ===== FONCTION INDICE =====
+function showHint() {
+    if (hintUsed) {
+        alert('Tu as déjà utilisé l\'indice pour cette question !');
+        return;
+    }
+    
+    hintUsed = true;
+    const answer = currentQuestion.answer;
+    feedbackElement.textContent = `💡 Indice : La réponse est ${answer} (tu perdras 1 point)`;
+    feedbackElement.className = 'feedback hint';
+    hintBtn.disabled = true;
+}
 console.log('✅ Application prête !');

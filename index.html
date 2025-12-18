@@ -24,8 +24,23 @@
         </header>
 
         <div class="game-section">
-            <!-- Écran de bienvenue -->
-            <div id="welcome-screen" class="screen active">
+            <!-- Écran principal d'accueil -->
+            <div id="main-menu-screen" class="screen active">
+                <h2>Bienvenue ! 👋</h2>
+                <p>Que veux-tu faire ?</p>
+                
+                <div class="menu-buttons">
+                    <button id="learn-btn" class="btn btn-primary btn-large">
+                        📚 Apprendre<br><small>Révise les tables tranquillement</small>
+                    </button>
+                    <button id="quiz-btn" class="btn btn-primary btn-large">
+                        🎮 Quiz<br><small>Teste tes connaissances</small>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Écran de sélection des tables -->
+            <div id="welcome-screen" class="screen">
                 <h2>Prêt à jouer ?</h2>
                 <p>Sélectionne la table que tu veux réviser :</p>
                 
@@ -60,6 +75,24 @@
                 </div>
 
                 <button id="start-btn" class="btn btn-primary">Commencer ! 🚀</button>
+                <button id="back-to-menu-btn" class="btn btn-secondary" style="margin-top: 10px;">← Retour</button>
+            </div>
+
+            <!-- Écran d'apprentissage -->
+            <div id="learn-screen" class="screen">
+                <div class="learn-header">
+                    <h2>📚 Apprentissage</h2>
+                    <p>Table de <span id="learn-table">2</span></p>
+                </div>
+
+                <div class="learn-content" id="learn-content"></div>
+
+                <div class="learn-navigation">
+                    <button id="learn-prev-btn" class="btn btn-secondary">← Précédent</button>
+                    <button id="learn-next-btn" class="btn btn-secondary">Suivant →</button>
+                </div>
+
+                <button id="learn-quit-btn" class="btn btn-primary" style="margin-top: 15px; width: 100%;">Retour à l'accueil</button>
             </div>
 
             <!-- Écran de jeu -->
@@ -78,6 +111,7 @@
                 <div class="answer-input">
                     <input type="text" inputmode="numeric" pattern="\d*" id="answer-input" placeholder="Écris ta réponse..." autofocus>
                     <button id="submit-btn" class="btn btn-secondary">Vérifier ✓</button>
+                    <button id="hint-btn" class="btn btn-hint" title="Utilise un indice (-1 point)">💡</button>
                 </div>
 
                 <div id="feedback" class="feedback"></div>
