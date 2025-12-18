@@ -108,7 +108,26 @@ retryAnswerInput.addEventListener('keypress', (e) => {
 });
 
 // ===== GESTION DU CLAVIER MOBILE =====
+// ===== DÉTECTION MOBILE =====
+function isMobileDevice() {
+    const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+    
+    // Détection pour Android, iPhone, iPad, etc.
+    const mobileRegex = /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i;
+    const isMobile = mobileRegex.test(userAgent.toLowerCase());
+    
+    // Alternative : vérifier la taille de l'écran
+    const isSmallScreen = window.innerWidth <= 768;
+    
+    return isMobile || isSmallScreen;
+}
+
 function setupMobileKeyboardFix() {
+    // Ne s'appliquer que sur mobile
+    if (!isMobileDevice()) {
+        return;
+    }
+    
     const inputs = [answerInput, retryAnswerInput];
     
     inputs.forEach(input => {
