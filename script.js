@@ -2,11 +2,13 @@
 let selectedTables = [];
 let currentQuestion = null;
 let score = 0;
+let retryScore = 0;
 let questionCount = 0;
 const MAX_QUESTIONS = 10;
 let mistakesList = []; // Tracker les erreurs
 let isRetryMode = false; // Flag pour le mode retesting
 let retryQuestionIndex = 0; // Index pour le retesting
+
 
 // Éléments du DOM
 const welcomeScreen = document.getElementById('welcome-screen');
@@ -41,9 +43,9 @@ retryErrorsBtn.addEventListener('click', retryErrors);
 retrySubmitBtn.addEventListener('click', checkRetryAnswer);
 
 // Validation et mask pour l'input de réponse
-answerInput.addEventListener('input', (e) => {
+answerInput.addEventListener('input', function() {
     // Supprimer tous les caractères non-numériques
-    e.target.value = e.target.value.replace(/[^0-9]/g, '');
+    this.value = this.value.replace(/\D/g, '');
 });
 
 answerInput.addEventListener('keypress', (e) => {
@@ -53,9 +55,9 @@ answerInput.addEventListener('keypress', (e) => {
 });
 
 // Validation et mask pour l'input de retesting
-retryAnswerInput.addEventListener('input', (e) => {
+retryAnswerInput.addEventListener('input', function() {
     // Supprimer tous les caractères non-numériques
-    e.target.value = e.target.value.replace(/[^0-9]/g, '');
+    this.value = this.value.replace(/\D/g, '');
 });
 
 retryAnswerInput.addEventListener('keypress', (e) => {
@@ -93,8 +95,15 @@ function generateQuestion() {
     const table = selectedTables[Math.floor(Math.random() * selectedTables.length)];
     
     // Choisir un nombre aléatoire entre 1 et 10
-    const number = Math.floor(Math.random() * 10) + 1;
+    // const number = Math.floor(Math.random() * 10) + 1;
     
+    // Choisir un nombre aléatoire entre 2 et 9 (1 et 10 ne sont pas interessants)
+    let number = 0;
+    do {
+        number = Math.floor(Math.random() * 8) + 2;
+    }
+    while(number == currentQuestion?.number); // on itére pour ne pas reposer la meme question
+
     currentQuestion = {
         table: table,
         number: number,
@@ -109,6 +118,7 @@ function generateQuestion() {
     feedbackElement.className = 'feedback';
     answerInput.value = '';
     answerInput.disabled = false;
+    submitBtn.disabled = false;
     answerInput.focus();
 }
 
@@ -123,6 +133,7 @@ function checkAnswer() {
 
     // Désactiver l'input
     answerInput.disabled = true;
+    submitBtn.disabled = true;
 
     questionCount++;
     
@@ -197,6 +208,7 @@ function showEndScreen() {
 function restartGame() {
     // Réinitialiser et retourner à l'écran de bienvenue
     score = 0;
+    retryScore = 0;
     questionCount = 0;
     selectedTables = [];
     mistakesList = [];
@@ -248,6 +260,7 @@ function generateRetryQuestion() {
     retryFeedbackElement.className = 'feedback';
     retryAnswerInput.value = '';
     retryAnswerInput.disabled = false;
+    retrySubmitBtn.disabled = false;
     retryAnswerInput.focus();
 }
 
@@ -262,9 +275,10 @@ function checkRetryAnswer() {
 
     // Désactiver l'input
     retryAnswerInput.disabled = true;
+    retrySubmitBtn.disabled = true;
 
     if (userAnswer === currentQuestion.answer) {
-        score++;
+        retryScore++;
         retryFeedbackElement.textContent = '✅ Bravo ! C\'est correct cette fois !';
         retryFeedbackElement.className = 'feedback correct';
     } else {
@@ -273,7 +287,7 @@ function checkRetryAnswer() {
     }
 
     // Mettre à jour le score
-    retryScoreElement.textContent = score;
+    retryScoreElement.textContent = retryScore;
     
     // Mettre à jour la barre de progression
     retryQuestionIndex++;
@@ -287,12 +301,12 @@ function checkRetryAnswer() {
 function showRetryEndScreen() {
     showScreen(endScreen);
     
-    finalScoreElement.textContent = score;
+    finalScoreElement.textContent = score + retryScore;
     endTitleElement.textContent = '🎯 Retesting Terminé ! 🎯';
     
-    if (score === mistakesList.length) {
+    if (retryScore === mistakesList.length) {
         endMessageElement.textContent = '🌟 Parfait ! Tu as corrigé toutes tes erreurs !';
-    } else if (score >= mistakesList.length * 0.8) {
+    } else if (retryScore >= mistakesList.length * 0.8) {
         endMessageElement.textContent = '✨ Très bon ! Tu as fait de gros progrès !';
     } else {
         endMessageElement.textContent = '💪 Continue à t\'entraîner, tu vas y arriver !';
