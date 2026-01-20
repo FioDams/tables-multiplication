@@ -24,8 +24,23 @@
         </header>
 
         <div class="game-section">
-            <!-- Écran principal d'accueil -->
-            <div id="main-menu-screen" class="screen active">
+            <!-- Écran principal : choix du sujet -->
+            <div id="subject-screen" class="screen active">
+                <h2>Quel sujet veux-tu réviser ? 📚</h2>
+                <p>Choisis ce que tu préfères :</p>
+                
+                <div class="menu-buttons">
+                    <button id="math-btn" class="btn btn-primary btn-large">
+                        🔢 Mathématiques<br><small>Tables de multiplication</small>
+                    </button>
+                    <button id="french-btn" class="btn btn-primary btn-large">
+                        🇫🇷 Français<br><small>Règles du pluriel</small>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Écran principal d'accueil (pour Mathématiques) -->
+            <div id="main-menu-screen" class="screen">
                 <h2>Bienvenue ! 👋</h2>
                 <p>Que veux-tu faire ?</p>
                 
@@ -37,9 +52,26 @@
                         🎮 Quiz<br><small>Teste tes connaissances</small>
                     </button>
                 </div>
+                <button id="back-to-subject-btn" class="btn btn-secondary" style="margin-top: 15px;">← Retour au choix du sujet</button>
             </div>
 
-            <!-- Écran de sélection des tables -->
+            <!-- Écran principal d'accueil (pour Français) -->
+            <div id="french-menu-screen" class="screen">
+                <h2>Bienvenue ! 👋</h2>
+                <p>Que veux-tu faire ?</p>
+                
+                <div class="menu-buttons">
+                    <button id="french-learn-btn" class="btn btn-primary btn-large">
+                        📚 Apprendre<br><small>Révise les règles tranquillement</small>
+                    </button>
+                    <button id="french-quiz-btn" class="btn btn-primary btn-large">
+                        🎮 Quiz<br><small>Teste tes connaissances</small>
+                    </button>
+                </div>
+                <button id="back-to-subject-french-btn" class="btn btn-secondary" style="margin-top: 15px;">← Retour au choix du sujet</button>
+            </div>
+
+            <!-- Écran de sélection des tables (mathématiques) -->
             <div id="welcome-screen" class="screen">
                 <h2>Prêt à jouer ?</h2>
                 <p>Sélectionne la table que tu veux réviser :</p>
@@ -76,6 +108,30 @@
 
                 <button id="start-btn" class="btn btn-primary">Commencer ! 🚀</button>
                 <button id="back-to-menu-btn" class="btn btn-secondary" style="margin-top: 10px;">← Retour</button>
+            </div>
+
+            <!-- Écran de sélection des règles (FRANÇAIS) -->
+            <div id="french-welcome-screen" class="screen">
+                <h2>Prêt à jouer ?</h2>
+                <p>Sélectionne la règle que tu veux réviser :</p>
+                
+                <div class="table-selection">
+                    <label>
+                        <input type="checkbox" class="french-rule" value="nom"> Pluriel des noms
+                    </label>
+                    <label>
+                        <input type="checkbox" class="french-rule" value="verbe"> Pluriel des verbes
+                    </label>
+                    <label>
+                        <input type="checkbox" class="french-rule" value="adjectif"> Pluriel des adjectifs
+                    </label>
+                    <label>
+                        <input type="checkbox" class="french-rule" value="accord"> Accord sujet-verbe
+                    </label>
+                </div>
+
+                <button id="french-start-btn" class="btn btn-primary">Commencer ! 🚀</button>
+                <button id="french-back-to-menu-btn" class="btn btn-secondary" style="margin-top: 10px;">← Retour</button>
             </div>
 
             <!-- Écran d'apprentissage -->
